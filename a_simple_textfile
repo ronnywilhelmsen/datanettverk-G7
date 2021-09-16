@@ -1,0 +1,83 @@
+Datanettverk – Øving 2
+1.   	Hva er DHCP, og hvordan virker den?
+DHCP er en nettverksprotokoll brukes i ipbaserte datanettverk. En DHCP-server tildeler automatisk ip-adresser og andre nettverksparametere til tilkoblede klienter, noe som gjør at klienter i et nettverk kan kommunisere med hverandre. DHCP ble utviklet som en standard protokoll av IEEE i 1993 og er fortsatt i bruk.
+Det er 4 trinn i prosessen. Første trinn kalles DHCP Discovery. Når en maskin blir koblet til et DHCP-aktivert nettverk vil klienten sende ut en melding (broadcast) som er en standard datapakke nesten tom for informasjon, men blir plukket opp av DHCP serveren. Andre trinn kalles DHCP Offers. Klienten mottar da et tilbud (offer) fra serveren, hvor klienten kan lease aksess. Avtalen bestemmer hvor lenge klienten kan forvente å bruke ipadressen, men også annen informasjon som ipadressen, nettverksmaske, klientens MAC-adresse, og ipadressen til DHCP-serveren som sendte meldingen til klienten.
+Trinn tre, DHCP Requests. Klienten forteller så DHCP-serveren at informasjonen er mottatt og akseptert. En broadcast fra DHCP-serveren til andre mulige DHCP-servere forteller at jobben er gjort, og dermed skal ingen andre DHCP-servere være vertskap for gitte klient, altså la være å sende DHCP Offer (det kan kun være én leiekontrakt per NIC enhet).
+Trinn fire, DHCP Acknowledgement (ACK): Det siste trinnet i prosessen er anerkjennelse. Serveren har hentet DHCPREQUEST fra klienten og sender tilbake DHCP Acknowledge.
+2.   	Hvordan er en MAC adresse bygd opp?
+MAC-adressen består av seks oktetter på totalt 48 bit, hvorav de tre første identifiserer produsenten av utstyret og de tre neste er produsentens egen unike identifikasjon av enheten. Formatet er heksadesimalt, med to sifre i hver gruppe – adskilt med kolon eller bindestrek. Formatet administreres av IEEE.
+MAC-adresser brukes til å identifisere nettverksutstyr, og dette kan utnyttes slik at en spesiell MAC-adresse alltid skal tildeles en gitt IP-adresse. MAC-adressen kan også benyttes som identifikator for adgangskontroll til nettverk, slik at kun utstyr med gitte MAC-adresser får tilgang til et nettverk eller en tjeneste.
+Address Resolution Protocol (ARP) brukes til å mappe kjente IP-adresser til MAC-adresser, mens Reverse Address Resolution Protocol (RARP) brukes til å mappe kjente MAC-adresser til IP-adresser.
+3.   	Hva er forskjellene på en MAC adresse og IPv4 adresse?
+MAC-adresser brukes på Link-laget, lag 2 i OSI-modellen. IPv4-adresser brukes på Nettverkslaget, nivå 3 i OSI-modellen.  
+IPv4 er et system for tildeling av ip-adresser til klienter tilkoblet internett (nettverk) og administreres av IANA og 5 regioner (RIR) som videre overlater administrasjon til lokale registrarer og internettleverandører.
+IPv4 definerer en ip-adresse som et 32 bit tall, totalt 4 byte, i motsetning til IPv6 som bruker et 128 bit tall. En IPv4-adresse består av to deler, en nettdel og klientdel. Alle klienter på et LAN har samme nettdel. Det er kun klientdelen som er forskjellig for alle klientene på LAN’et.
+En ip-adresse har to primære funksjoner. Den identifiserer verten eller klienten eller mer spesifikt dens nettverkgrensesnitt, og den tilbyr vertens lokasjon i nettverket og dermed egenskapen å etablere en rute til den verten. Hvilken adresse din klient får er bestemt av det LAN man er tilkoblet.
+4.   	Anta at du har fått tildelt et nett med nett-adresse 158.29.16.00 og maske 255.255.248.0, av din internettleverandør. 
+a.   	Istedet for å angi ditt nett med nett-adresse og maske slik som over, kan det skrives på en annen måte. Hvordan skrives det?
+158.29.16.0/21
+Adresse:           	10011110.00011101.00010 000.00000000 
+Nettmaske:           	11111111.11111111.11111 000.00000000
+b.   	Hvor mange host kan du tilknytte ditt nett?
+2046
+c.        Hva blir broadcast-adressen?
+Broadcast: 158.29.23.255
+d.   	Hva blir høyeste og laveste IP-adresse på en host på dette nett?
+Min:   158.29.16.1       	           	10011110.00011101.00010 000.00000001
+Max:   158.29.23.254     	           	10011110.00011101.00010 111.11111110
+5.   	Nå skal du dele ditt nett opp i to like store subnett.
+ 
+a.   	Hva blir nett-adressene på disse to nett?
+158.29.0.0                   	           	
+158.29.128.0              	
+b.   	Hva blir masken på disse to nett?
+/22
+255.255.248.0
+255.255.252.0
+c.        Hva blir broadcast-adressene?
+158.29.7.255
+158.29.135.255
+d.   	Hva blir høyeste og laveste IP-adresse på en host på hvert av disse nett?
+158.29.0.1 - 158.29.7.254
+158.29.128.1 - 158.29.135.254
+6.   	Nå skal du lage seks like store subnett, i stedet for to like store subnett.
+ 
+a.   	Hva blir nett-adressene på disse nett?
+Nettadresse/ip-range/broadcastadresse
+158.29.0.0: 158.29.0.1-158.29.47.254 - 158.29.47.255
+158.29.48.0	158.29.48.1 - 158.29.87.254       	158.29.87.255
+158.29.88.0: 158.29.88.1-158.29.135.254- 158.29.135.255
+158.29.136.0  158.29.136.1 - 158.29.175.254       	158.29.175.255
+158.29.176.0: 158.29.176.1-158.29.215.254 - 158.29.215.255
+158.29.216.0  158.29.216.1 - 158.29.255.254          	158.29.255.255
+Hva blir masken på disse nett?
+ 
+b.   	Hvis nettene ikke trengte å være like store, hvordan kunne nettadressene, med maske blitt da?
+Skjønner ikke spørsmålet, for de seks nettene kunne vært hva som helst innenfor parameterne…det ville vært alle logiske permutasjoner innenfor parameterne.
+7.   	En bedrift har sitt hovedkontor i Halden. Bedriften skal opprette et nytt kontor i Fredrikstad. Hovedkontoret i Halden har et lokalnett som er delt i to subnett, Ethernet 1 og Ethernet 2, koblet sammen med en ruter (Ruter 1). Bedriften er koblet til Internet via den samme ruteren. Kontoret i Fredrikstad skal tilknyttes hovedkontoret via en punkt-til-punkt forbindelse. Da dette skjer, vil punkt A, på Ruter 1, kobles til punkt B. Se på figuren under
+La oss først se på kontoret i Halden. IP-adressene de fikk på sitt nett var 139.26.154.00/24. Dette har bedriften delt opp i subnett. Adressemasken på subnettene (Ethernet 1 og Ethernet 2) er 255.255.255.224. Nettadressen på Ethernet 1 er 139.26.154.64. og på Ethernet 2 er 139.26.154.32.
+ 
+a.   	Hvor mange PC'er kan tilknyttes Ethernet1 ?
+Alle hosts for hele nettet: 139.26.154.1 - 139.26.154.254 (254)
+Adressemaske subnettene Ethernet1 og Ethernet2: 255.255.255.224 (32 ipadresser)
+Forventer at Ethernet1 er et subnett 139.26.154.64-96: 32 ipadresser (30 enheter)
+Forventer at Ethernet2 er et subnett 139.26.154.32-64: 32 ipadresser (30 enheter)
+Forventer at Ethernet3 er et subnett 139.26.154.00-31 eller fra 139.26.154.96-251.
+Forventer at punkt til punkt har nettadresse : 139.26.154.252-55: 2 hosts
+b.   	PC1 og PC2 må få hver sin IP-adresse. Hvilke IP-adresser kan de få?
+                  	PC1:  	139.26.154.65
+                  	PC2:  	139.26.154.33
+c.        Hva er høyeste og laveste IP-adresse på Ethernet2? – Forklar hvordan du kommer frem til svaret.
+  	Forventer at Ethernet2 er et subnett 139.26.154.32-64: Subnettet har nettadresse 139.26.154.32 og broadcastadresse 139.26.154.64. Da er 139.26.154.31-139.26.154.63 en ip-range for hosts, til sammen 30 enheter.
+ 
+b.   	Hva er broadcastadressen til Ethernet1?
+ 139.26.154.96
+Nå skal kontoret i Fredrikstad tilknyttes kontoret i Halden. Bedriften setter opp en punkt-til-punkt forbindelse mellom de to kontorene. (Punkt A og B knyttes sammen).
+ 
+a.   	Hvilke IP-adresser får hvert endepunkt i forbindelsen mellom de to kontorene, og hva blir nettmasken? Ta hensyn til at bedriften ønsker å utnytte IP-nummrene best mulig.
+   	           	255.255.255.252
+b.   	Hva blir nettadresseet til Ethernet3?
+  	Vet ikke. Tenker at Ethernet3 er et subnett 139.26.154.00-31 eller fra 139.26.154.96-251.
+c.        Hva blir nettmasken til Ethernet3?
+Vet ikke. Enten 255.255.255.224 eller 255.255.255.0
+
