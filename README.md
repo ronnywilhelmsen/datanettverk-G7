@@ -1,20 +1,8 @@
-<img align="right" width="40%" src="https://www.finos.org/hubfs/FINOS/finos-logo/FINOS_Icon_Wordmark_Name_RGB_horizontal.png">
+Øving 1:
+https://docs.google.com/document/d/1GE8PNLo1wWQDRi89SuikB-ceMPNG7nbQZRAypEZp0DQ/edit?fbclid=IwAR08xGlJXDnt3U8RBh7BUnsTqmThTayCdZgjAT003fFhMb9_iFjpOY5kizQ
 
-# FINOS Software Project Blueprint
+Øving 2:
+https://docs.google.com/document/d/1XH9wCkCI8-If4tZ3PMckcOjckDrafFukb9YMDT1jrGo/edit
 
-Project blueprint is a GitHub repository template for all [Fintech Open Source Foundation (FINOS)](https://www.finos.org/) hosted GitHub repositories, contributed and maintained by FINOS as part of the [Open Developer Platform (ODP)](https://odp.finos.org) initiative.
+(endelig) https://docs.google.com/document/d/14W93TIRzwRUGp2wvrTYMSNiiWlZy1ycUcK_3Lf6ZIOs/edit?fbclid=IwAR0I2F-4cOU8bpMXEFAn8NJSEEYBTeqGXneiI1HZ-529f62dwqfpw8-4A6g
 
-## How to use this blueprint
-
-Please follow https://odp.finos.org/docs/project-collaboration/#finos-project-blueprint
-
-## Governance
-This blueprint implements https://github.com/finos/community/tree/master/governance#open-source-software-projects
-
-## License
-
-Copyright 2019 Fintech Open Source Foundation
-
-Distributed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-SPDX-License-Identifier: [Apache-2.0](https://spdx.org/licenses/Apache-2.0)
